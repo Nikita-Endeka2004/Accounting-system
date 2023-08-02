@@ -11,7 +11,10 @@ export class Wallet {
   title: string
 
   @Column()
-  value: number
+  type: string
+
+  @Column({nullable: true})
+  amount: number
 
   @ManyToOne(() => User, user => user.wallets)
   @JoinColumn({name: 'user_id'})
