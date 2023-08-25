@@ -22,6 +22,6 @@ export class Wallet {
 
   @ManyToOne(() => Category, category => category.wallets)
   @JoinColumn({name: 'category_id'})
-  categories: Category
+  category: Category
 
 }

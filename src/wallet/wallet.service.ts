@@ -30,6 +30,9 @@ export class WalletService {
       where: {
         user: {id}
       },
+      relations: {
+        category: true,
+      },
       order: {
         id: 'DESC',
       },
@@ -44,7 +47,7 @@ export class WalletService {
       },
       relations: {
         user: true,
-        categories: true
+        category: true
       }
     })
     if(!actions) throw new NotFoundException('Actions not found')
@@ -74,7 +77,7 @@ export class WalletService {
       },
       relations:{
         user: true,
-        categories: true
+        category: true
       },
       order: {
         id: 'DESC'
@@ -83,6 +86,19 @@ export class WalletService {
       skip: (page - 1) * limit
     })
     return actions
+  }
+
+  async findAllByType(id: number, type: string){
+    const wallets = await this.WalletRepository.find({
+      where: {
+        user: {id},
+        type,
+      }
+    })
+
+    const total = wallets.reduce((acc, obj) => acc + obj.amount , 0)
+
+    return total
   }
 
 }

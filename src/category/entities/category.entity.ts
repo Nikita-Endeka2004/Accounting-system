@@ -1,6 +1,6 @@
 import { User } from "src/user/entities/user.entity";
 import { Wallet } from "src/wallet/entities/wallet.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Category {
@@ -14,7 +14,7 @@ export class Category {
   @JoinColumn({name: 'user_id'})
   user: User
 
-  @ManyToOne(() => Wallet, wallet => wallet.categories)
+  @ManyToOne(() => Wallet, wallet => wallet.category)
   @JoinColumn({name: 'wallet_id'})
   wallets: Wallet[]
 
